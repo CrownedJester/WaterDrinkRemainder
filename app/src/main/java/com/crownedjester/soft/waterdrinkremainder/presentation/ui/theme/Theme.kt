@@ -1,4 +1,4 @@
-package com.crownedjester.soft.waterdrinkremainder.ui.theme
+package com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme

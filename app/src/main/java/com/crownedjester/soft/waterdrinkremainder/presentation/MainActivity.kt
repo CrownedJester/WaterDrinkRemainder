@@ -1,4 +1,4 @@
-package com.crownedjester.soft.waterdrinkremainder
+package com.crownedjester.soft.waterdrinkremainder.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

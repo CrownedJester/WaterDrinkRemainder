@@ -1,15 +1,26 @@
-package com.crownedjester.soft.waterdrinkremainder.ui.theme
+package com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import com.crownedjester.soft.waterdrinkremainder.R
 
 // Set of Material typography styles to start with
+private val bold = Font(R.font.bold, FontWeight.Bold)
+private val thin = Font(R.font.thin, FontWeight.Thin)
+private val regular = Font(R.font.regular, FontWeight.Normal)
+private val light = Font(R.font.light, FontWeight.Light)
+
+val fontFamily = FontFamily(
+    listOf(bold, thin, regular, light)
+)
+
 val Typography = Typography(
     body1 = TextStyle(
-        fontFamily = FontFamily.Default,
+        fontFamily = fontFamily,
         fontWeight = FontWeight.Normal,
         fontSize = 16.sp
     )
