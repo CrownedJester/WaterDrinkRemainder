@@ -32,10 +32,10 @@ fun DashboardScreen() {
             modifier = Modifier.fillMaxWidth(),
             text = "Current Hydration",
             textAlign = TextAlign.Center,
-            fontSize = 32.sp,
+            fontSize = 28.sp,
             fontFamily = fontFamily,
             fontWeight = FontWeight.Bold,
-            letterSpacing = 2.sp,
+            letterSpacing = 1.sp,
             color = deepBlue
         )
 
