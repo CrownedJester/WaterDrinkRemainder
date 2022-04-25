@@ -26,19 +26,20 @@ fun BottleItem(
     Card(
         modifier = Modifier
             .size(80.dp, 48.dp)
-            .alpha(0.75f)
+            .alpha(0.5f)
             .clickable { onBottleClick(cup.volume) },
-        shape = RoundedCornerShape(20),
+        shape = RoundedCornerShape(48),
         backgroundColor = cup.color,
         elevation = 4.dp
     ) {
         Row(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier
+                .fillMaxSize(),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(24.dp)
         ) {
 
-            Spacer(modifier = Modifier.width(12.dp))
+            Spacer(modifier = Modifier.width(10.dp))
 
             Icon(
                 painter = painterResource(cup.iconRes),
