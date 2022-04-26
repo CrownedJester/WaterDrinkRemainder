@@ -15,3 +15,6 @@ val dropBackground = Color(0xFFE1BEE7)
 val capBackground = Color(0xFFC8E6C9)
 val bigCupBackground = Color(0xFFFFCCBC)
 val bottleBackground = Color(0xFFDCE775)
+
+val orangeLightColor = Color(0xFFFF8A65)
+val columnBackground = Color(0xD9FFFFFF)
