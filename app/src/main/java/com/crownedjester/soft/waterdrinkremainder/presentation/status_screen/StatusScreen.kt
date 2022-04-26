@@ -22,7 +22,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.crownedjester.soft.waterdrinkremainder.presentation.status_screen.components.CustomHydrationDialog
-import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.deepBlue
+import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.DeepBlue
 import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.fontFamily
 
 @Composable
@@ -64,7 +64,7 @@ fun StatusScreen(drankAmount: Int, dailyGoalAmount: Int) {
                     style = SpanStyle(
                         fontFamily = fontFamily,
                         fontWeight = FontWeight.Bold,
-                        color = deepBlue,
+                        color = DeepBlue,
                         fontSize = 48.sp,
                         letterSpacing = 2.sp
                     )
@@ -76,7 +76,7 @@ fun StatusScreen(drankAmount: Int, dailyGoalAmount: Int) {
                     style = SpanStyle(
                         fontFamily = fontFamily,
                         fontWeight = FontWeight.Normal,
-                        color = deepBlue,
+                        color = DeepBlue,
                         fontSize = 16.sp,
                     )
                 ) {

@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.sp
 import com.crownedjester.soft.waterdrinkremainder.domain.model.cupsData
 import com.crownedjester.soft.waterdrinkremainder.presentation.dashboard_screen.components.BottleItem
 import com.crownedjester.soft.waterdrinkremainder.presentation.dashboard_screen.components.CircularProgress
-import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.deepBlue
+import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.DeepBlue
 import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.fontFamily
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -36,7 +36,7 @@ fun DashboardScreen() {
             fontFamily = fontFamily,
             fontWeight = FontWeight.Bold,
             letterSpacing = 1.sp,
-            color = deepBlue
+            color = DeepBlue
         )
 
 

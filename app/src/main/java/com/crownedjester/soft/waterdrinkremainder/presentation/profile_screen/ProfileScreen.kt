@@ -2,6 +2,7 @@ package com.crownedjester.soft.waterdrinkremainder.presentation.profile_screen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -17,8 +18,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.crownedjester.soft.waterdrinkremainder.domain.model.User
-import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.columnBackground
-import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.orangeLightColor
+import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.ColumnBackground
+import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.OrangeLightColor
+import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.CameraIconBorder
 
 @Composable
 fun ProfileScreen(user: User) {
@@ -27,7 +29,7 @@ fun ProfileScreen(user: User) {
         modifier = Modifier
             .fillMaxSize()
             .zIndex(0f)
-            .background(color = orangeLightColor),
+            .background(color = OrangeLightColor),
 
         ) {
 
@@ -60,7 +62,8 @@ fun ProfileScreen(user: User) {
 
         IconButton(modifier = Modifier
             .size(28.dp)
-            .background(color = orangeLightColor, shape = CircleShape)
+            .border(width = 1.dp, color = CameraIconBorder, shape = CircleShape)
+            .background(color = OrangeLightColor, shape = CircleShape)
             .zIndex(90f)
             .constrainAs(imageLoaderIcon) {
                 bottom.linkTo(backImageSurface.bottom)
@@ -84,7 +87,7 @@ fun ProfileScreen(user: User) {
                 .fillMaxSize()
                 .zIndex(10f)
                 .background(
-                    color = columnBackground,
+                    color = ColumnBackground,
                     shape = RoundedCornerShape(topStartPercent = 8, topEndPercent = 8)
                 )
                 .constrainAs(contentColumn) {

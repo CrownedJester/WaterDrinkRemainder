@@ -10,9 +10,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.DialogProperties
-import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.deepBlue
+import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.DeepBlue
 import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.fontFamily
-import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.lightBlue
+import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.LightBlue
 
 @Composable
 fun CustomHydrationDialog(
@@ -41,7 +41,7 @@ fun CustomHydrationDialog(
                         fontFamily = fontFamily,
                         fontWeight = FontWeight.Normal,
                         textAlign = TextAlign.Center,
-                        color = deepBlue,
+                        color = DeepBlue,
                         letterSpacing = 1.sp
                     )
 
@@ -50,7 +50,7 @@ fun CustomHydrationDialog(
                             .fillMaxWidth()
                             .alpha(0.3f)
                             .height(1.dp),
-                        color = lightBlue
+                        color = LightBlue
                     )
                 }
             },
@@ -64,7 +64,7 @@ fun CustomHydrationDialog(
                     fontFamily = fontFamily,
                     fontWeight = FontWeight.Light,
                     textAlign = TextAlign.Center,
-                    color = lightBlue
+                    color = LightBlue
                 )
 
                 Slider(

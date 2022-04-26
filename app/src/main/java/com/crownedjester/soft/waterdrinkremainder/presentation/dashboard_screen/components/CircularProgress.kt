@@ -28,10 +28,10 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.deepBlue
+import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.DeepBlue
 import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.fontFamily
-import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.lightBlue
-import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.thinBlue
+import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.LightBlue
+import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.ThinBlue
 import kotlin.math.roundToInt
 
 @Composable
@@ -51,20 +51,20 @@ fun CircularProgress(
                 .fillMaxSize()
                 .alpha(0.2f),
             progress = 1f,
-            color = thinBlue,
+            color = ThinBlue,
             strokeWidth = 12.dp
         )
 
         CustomProgressIndicator(
             modifier = Modifier.fillMaxSize(),
             progress = drankAmount.toFloat() / dailyGoalAmount.toFloat(),
-            color = lightBlue,
+            color = LightBlue,
             strokeWidth = 12.dp
         )
 
         Text(
             textAlign = TextAlign.Center,
-            color = deepBlue,
+            color = DeepBlue,
             text = buildAnnotatedString {
 
                 withStyle(
