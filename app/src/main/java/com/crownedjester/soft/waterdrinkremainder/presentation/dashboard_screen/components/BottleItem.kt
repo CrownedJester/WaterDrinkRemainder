@@ -30,7 +30,6 @@ fun BottleItem(
             .clickable { onBottleClick(cup.volume) },
         shape = RoundedCornerShape(48),
         backgroundColor = cup.color,
-        elevation = 4.dp
     ) {
         Row(
             modifier = Modifier

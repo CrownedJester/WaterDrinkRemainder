@@ -19,3 +19,5 @@ val BottleBackground = Color(0xFFDCE775)
 val OrangeLightColor = Color(0xFFFF8A65)
 val ColumnBackground = Color(0xD9FFFFFF)
 val CameraIconBorder = Color(0x99FFFFFF)
+
+val DeepPurple = Color(0xFF2F026D)
