@@ -11,7 +11,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.DialogProperties
 import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.DeepBlue
-import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.fontFamily
+import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.importedFontFamily
 import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.LightBlue
 
 @Composable
@@ -38,7 +38,7 @@ fun CustomHydrationDialog(
                         modifier = Modifier.fillMaxWidth(),
                         text = "Set amount of drank water",
                         fontSize = 20.sp,
-                        fontFamily = fontFamily,
+                        fontFamily = importedFontFamily,
                         fontWeight = FontWeight.Normal,
                         textAlign = TextAlign.Center,
                         color = DeepBlue,
@@ -61,7 +61,7 @@ fun CustomHydrationDialog(
                     modifier = Modifier
                         .fillMaxWidth(),
                     text = "$value",
-                    fontFamily = fontFamily,
+                    fontFamily = importedFontFamily,
                     fontWeight = FontWeight.Light,
                     textAlign = TextAlign.Center,
                     color = LightBlue
@@ -93,7 +93,7 @@ fun CustomHydrationDialog(
                     }) {
                         Text(
                             text = "Cancel",
-                            fontFamily = fontFamily,
+                            fontFamily = importedFontFamily,
                             fontWeight = FontWeight.Normal
                         )
                     }
@@ -104,7 +104,7 @@ fun CustomHydrationDialog(
                     }) {
                         Text(
                             text = "Accept",
-                            fontFamily = fontFamily,
+                            fontFamily = importedFontFamily,
                             fontWeight = FontWeight.Normal
                         )
                     }

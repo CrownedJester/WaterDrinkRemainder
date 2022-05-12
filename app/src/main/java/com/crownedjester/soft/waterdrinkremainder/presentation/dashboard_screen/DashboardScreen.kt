@@ -17,7 +17,7 @@ import com.crownedjester.soft.waterdrinkremainder.domain.model.cupsData
 import com.crownedjester.soft.waterdrinkremainder.presentation.dashboard_screen.components.BottleItem
 import com.crownedjester.soft.waterdrinkremainder.presentation.dashboard_screen.components.CircularProgress
 import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.DeepBlue
-import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.fontFamily
+import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.importedFontFamily
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -33,7 +33,7 @@ fun DashboardScreen() {
             text = "Current Hydration",
             textAlign = TextAlign.Center,
             fontSize = 28.sp,
-            fontFamily = fontFamily,
+            fontFamily = importedFontFamily,
             fontWeight = FontWeight.Bold,
             letterSpacing = 1.sp,
             color = DeepBlue

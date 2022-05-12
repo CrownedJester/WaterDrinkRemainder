@@ -14,6 +14,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
@@ -21,12 +22,16 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.zIndex
+import androidx.constraintlayout.compose.ConstraintLayout
 import com.crownedjester.soft.waterdrinkremainder.presentation.status_screen.components.CustomHydrationDialog
+import com.crownedjester.soft.waterdrinkremainder.presentation.status_screen.components.WavesCanvas
 import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.DeepBlue
-import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.fontFamily
+import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.importedFontFamily
+import com.crownedjester.soft.waterdrinkremainder.presentation.util.Formats.toSeparatedDecimalString
 
 @Composable
-fun StatusScreen(drankAmount: Int, dailyGoalAmount: Int) {
+fun StatusScreen(drankAmount: Int, dailyGoalAmount: Int, modifier: Modifier = Modifier) {
 
     var isDialogShown by remember { mutableStateOf(false) }
 
@@ -38,68 +43,127 @@ fun StatusScreen(drankAmount: Int, dailyGoalAmount: Int) {
         isDialogShown = it
     }
 
-    Column(modifier = Modifier.fillMaxSize()) {
+    val screenHeightDp = LocalConfiguration.current.screenHeightDp
+    val topMargin = (screenHeightDp.toFloat() - (screenHeightDp.toFloat() * (2500f / 2500f)))
 
-        Spacer(modifier = Modifier.height(48.dp))
+    Box(
+        modifier = modifier.fillMaxSize()
+    ) {
 
-        IconButton(modifier = Modifier
-            .background(color = Color.Transparent, shape = CircleShape)
-            .offset((-32).dp)
-            .align(Alignment.End)
-            .size(32.dp),
-            onClick = { /*TODO*/ },
-            content = {
-                Icon(
-                    imageVector = Icons.Default.Alarm, contentDescription = "alarm icon"
+        ConstraintLayout(modifier = Modifier.fillMaxSize()) {
+
+            val (waves, progressRow) = createRefs()
+
+            /*  Row(
+                  modifier = Modifier
+                      .fillMaxWidth()
+                      .constrainAs(progressRow) {
+                          top.linkTo(parent.top, (topMargin + WAVES_HEIGHT /2).dp)
+                          linkTo(start = parent.start, end = parent.end)
+                      },
+                  verticalAlignment = Alignment.CenterVertically
+              ) {
+                  Text(
+                      modifier = Modifier.alpha(ContentAlpha.medium),
+                      text = "50%",
+                      style = MaterialTheme.typography.h5,
+                      fontFamily = importedFontFamily
+                  )
+
+                  Divider(
+                      modifier = Modifier
+                          .fillMaxWidth()
+                          .alpha(ContentAlpha.disabled)
+                          .padding(start = 12.dp)
+                          .height(2.dp),
+                      color = Color.Black
+                  )
+              }*/
+
+            WavesCanvas(
+                wavesHeight = WAVES_HEIGHT,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .zIndex(0f)
+                    .constrainAs(waves) {
+                        top.linkTo(
+                            parent.top,
+                            topMargin.dp
+                        )
+                        linkTo(start = parent.start, end = parent.end)
+                        bottom.linkTo(parent.bottom)
+                    }
+            )
+
+            Column(modifier = Modifier.fillMaxSize()) {
+
+                Spacer(modifier = Modifier.height(48.dp))
+
+                IconButton(modifier = Modifier
+                    .background(color = Color.Transparent, shape = CircleShape)
+                    .offset((-32).dp)
+                    .align(Alignment.End)
+                    .size(32.dp),
+                    onClick = { /*TODO*/ },
+                    content = {
+                        Icon(
+                            imageVector = Icons.Default.Alarm, contentDescription = "alarm icon"
+                        )
+                    })
+
+                Spacer(modifier = Modifier.height(96.dp))
+
+                Text(modifier = Modifier.fillMaxWidth(),
+                    textAlign = TextAlign.Center,
+                    text = buildAnnotatedString {
+
+                        withStyle(
+                            style = SpanStyle(
+                                fontFamily = importedFontFamily,
+                                fontWeight = FontWeight.Bold,
+                                color = DeepBlue,
+                                fontSize = 48.sp,
+                                letterSpacing = 2.sp
+                            )
+                        ) {
+                            append(drankAmount.toSeparatedDecimalString(textAfter = " ml"))
+                        }
+
+                        withStyle(
+                            style = SpanStyle(
+                                fontFamily = importedFontFamily,
+                                fontWeight = FontWeight.Normal,
+                                color = DeepBlue,
+                                fontSize = 16.sp,
+                            )
+                        ) {
+                            append(
+                                (dailyGoalAmount - drankAmount).toSeparatedDecimalString(
+                                    textBefore = "\nRemaining: ", textAfter = " ml"
+                                )
+                            )
+                        }
+
+                    })
+
+                Spacer(modifier = Modifier.height(200.dp))
+
+                FloatingActionButton(modifier = Modifier.align(Alignment.CenterHorizontally),
+                    backgroundColor = Color.White,
+                    onClick = {
+                        isDialogShown = true
+                    },
+                    content = {
+                        Icon(
+                            imageVector = Icons.Default.Add,
+                            contentDescription = "add custom amount water"
+                        )
+                    }
                 )
-            })
 
-        Spacer(modifier = Modifier.height(96.dp))
-
-        Text(modifier = Modifier.fillMaxWidth(),
-            textAlign = TextAlign.Center,
-            text = buildAnnotatedString {
-
-                withStyle(
-                    style = SpanStyle(
-                        fontFamily = fontFamily,
-                        fontWeight = FontWeight.Bold,
-                        color = DeepBlue,
-                        fontSize = 48.sp,
-                        letterSpacing = 2.sp
-                    )
-                ) {
-                    append("%,d ml".format(drankAmount))
-                }
-
-                withStyle(
-                    style = SpanStyle(
-                        fontFamily = fontFamily,
-                        fontWeight = FontWeight.Normal,
-                        color = DeepBlue,
-                        fontSize = 16.sp,
-                    )
-                ) {
-                    append("\nRemaining: %,d ml".format(dailyGoalAmount - drankAmount))
-                }
-
-            })
-
-        Spacer(modifier = Modifier.height(200.dp))
-
-        FloatingActionButton(modifier = Modifier.align(Alignment.CenterHorizontally),
-            backgroundColor = Color.White,
-            onClick = {
-                isDialogShown = true
-            },
-            content = {
-                Icon(
-                    imageVector = Icons.Default.Add, contentDescription = "add custom amount water"
-                )
             }
-        )
-
-
+        }
     }
-
 }
+
+private const val WAVES_HEIGHT = 60f

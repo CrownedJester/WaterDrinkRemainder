@@ -15,7 +15,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.crownedjester.soft.waterdrinkremainder.domain.model.Cup
-import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.fontFamily
+import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.importedFontFamily
 
 @Composable
 fun BottleItem(
@@ -47,7 +47,7 @@ fun BottleItem(
 
             Text(
                 text = "${cup.volume} ml",
-                fontFamily = fontFamily,
+                fontFamily = importedFontFamily,
                 fontWeight = FontWeight.Light,
                 textAlign = TextAlign.Center
             )

@@ -29,9 +29,10 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.DeepBlue
-import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.fontFamily
 import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.LightBlue
 import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.ThinBlue
+import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.importedFontFamily
+import com.crownedjester.soft.waterdrinkremainder.presentation.util.Formats.toSeparatedDecimalString
 import kotlin.math.roundToInt
 
 @Composable
@@ -70,7 +71,7 @@ fun CircularProgress(
                 withStyle(
                     style = SpanStyle(
                         fontWeight = FontWeight.Bold,
-                        fontFamily = fontFamily,
+                        fontFamily = importedFontFamily,
                         fontSize = 40.sp
                     )
                 ) {
@@ -80,21 +81,26 @@ fun CircularProgress(
                 withStyle(
                     style = SpanStyle(
                         fontWeight = FontWeight.Normal,
-                        fontFamily = fontFamily,
+                        fontFamily = importedFontFamily,
                         fontSize = 24.sp
                     )
                 ) {
-                    append("\n%,d ml\n".format(drankAmount))
+                    append(
+                        drankAmount.toSeparatedDecimalString(
+                            textBefore = "\n",
+                            textAfter = " ml\n"
+                        )
+                    )
                 }
 
                 withStyle(
                     style = SpanStyle(
                         fontWeight = FontWeight.Thin,
-                        fontFamily = fontFamily,
+                        fontFamily = importedFontFamily,
                         fontSize = 14.sp,
                     )
                 ) {
-                    append("%,d ml".format(drankAmount - dailyGoalAmount))
+                    append((drankAmount - dailyGoalAmount).toSeparatedDecimalString(textAfter = " ml"))
                 }
 
             }

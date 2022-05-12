@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import coil.compose.rememberAsyncImagePainter
-import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.fontFamily
+import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.importedFontFamily
 import com.crownedjester.soft.waterdrinkremainder.presentation.util.ProfileItemData
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -48,7 +48,7 @@ fun ProfileItem(profileItemData: ProfileItemData, onClick: () -> Unit) {
 
             Text(
                 text = profileItemData.title,
-                fontFamily = fontFamily,
+                fontFamily = importedFontFamily,
                 fontWeight = FontWeight.Normal,
                 fontSize = 20.sp
             )

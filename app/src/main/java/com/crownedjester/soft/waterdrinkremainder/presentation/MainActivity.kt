@@ -102,7 +102,7 @@ class MainActivity : ComponentActivity() {
                             navController = navController,
                         ) {
                             composable(route = Screen.StatusScreen.route) {
-                                StatusScreen(drankAmount = 1146, dailyGoalAmount = 2500)
+                                StatusScreen(drankAmount = 1146, dailyGoalAmount = 2500,)
                             }
                             composable(route = Screen.DashboardScreen.route) {
                                 DashboardScreen()

@@ -121,7 +121,7 @@ fun ProfileScreen(user: User) {
 
                     withStyle(
                         style = SpanStyle(
-                            fontFamily = fontFamily,
+                            fontFamily = importedFontFamily,
                             fontWeight = FontWeight.Normal,
                             fontSize = 20.sp,
                             color = DeepBlue
@@ -135,7 +135,7 @@ fun ProfileScreen(user: User) {
 
                     withStyle(
                         style = SpanStyle(
-                            fontFamily = fontFamily,
+                            fontFamily = importedFontFamily,
                             fontWeight = FontWeight.Light,
                             fontSize = 14.sp,
                             color = LightBlue,

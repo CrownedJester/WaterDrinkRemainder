@@ -14,13 +14,13 @@ private val thin = Font(R.font.thin, FontWeight.Thin)
 private val regular = Font(R.font.regular, FontWeight.Normal)
 private val light = Font(R.font.light, FontWeight.Light)
 
-val fontFamily = FontFamily(
+val importedFontFamily = FontFamily(
     listOf(bold, thin, regular, light)
 )
 
 val Typography = Typography(
     body1 = TextStyle(
-        fontFamily = fontFamily,
+        fontFamily = importedFontFamily,
         fontWeight = FontWeight.Normal,
         fontSize = 16.sp
     )
