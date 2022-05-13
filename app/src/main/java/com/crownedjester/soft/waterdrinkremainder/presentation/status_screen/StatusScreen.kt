@@ -24,27 +24,41 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import androidx.constraintlayout.compose.ConstraintLayout
+import com.crownedjester.soft.waterdrinkremainder.presentation.HydrationViewModel
 import com.crownedjester.soft.waterdrinkremainder.presentation.status_screen.components.CustomHydrationDialog
 import com.crownedjester.soft.waterdrinkremainder.presentation.status_screen.components.WavesCanvas
 import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.DeepBlue
 import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.importedFontFamily
+import com.crownedjester.soft.waterdrinkremainder.presentation.util.Formats
+import com.crownedjester.soft.waterdrinkremainder.presentation.util.Formats.calculateRemaining
 import com.crownedjester.soft.waterdrinkremainder.presentation.util.Formats.toSeparatedDecimalString
 
 @Composable
-fun StatusScreen(drankAmount: Int, dailyGoalAmount: Int, modifier: Modifier = Modifier) {
+fun StatusScreen(
+    modifier: Modifier = Modifier,
+    viewModel: HydrationViewModel,
+    dailyGoalHydration: Int = 2500
+) {
 
     var isDialogShown by remember { mutableStateOf(false) }
+    val currentDailyHydration by viewModel.currentDailyHydration.collectAsState()
 
     CustomHydrationDialog(
         isDialogShown = isDialogShown,
-        onAccept = { /*TODO*/ },
+        onAccept = {
+            viewModel.updateDailyHydration(it)
+        },
         onCancel = {/*todo*/ }
     ) {
         isDialogShown = it
     }
 
     val screenHeightDp = LocalConfiguration.current.screenHeightDp
-    val topMargin = (screenHeightDp.toFloat() - (screenHeightDp.toFloat() * (2500f / 2500f)))
+    val topMargin = screenHeightDp.toFloat() * Formats.calculateProgress(
+        currentDailyHydration,
+        dailyGoalHydration
+    )
+    val remainingHydration = calculateRemaining(currentDailyHydration, dailyGoalHydration)
 
     Box(
         modifier = modifier.fillMaxSize()
@@ -126,7 +140,7 @@ fun StatusScreen(drankAmount: Int, dailyGoalAmount: Int, modifier: Modifier = Mo
                                 letterSpacing = 2.sp
                             )
                         ) {
-                            append(drankAmount.toSeparatedDecimalString(textAfter = " ml"))
+                            append(currentDailyHydration.toSeparatedDecimalString(textAfter = " ml"))
                         }
 
                         withStyle(
@@ -138,7 +152,7 @@ fun StatusScreen(drankAmount: Int, dailyGoalAmount: Int, modifier: Modifier = Mo
                             )
                         ) {
                             append(
-                                (dailyGoalAmount - drankAmount).toSeparatedDecimalString(
+                                (remainingHydration).toSeparatedDecimalString(
                                     textBefore = "\nRemaining: ", textAfter = " ml"
                                 )
                             )

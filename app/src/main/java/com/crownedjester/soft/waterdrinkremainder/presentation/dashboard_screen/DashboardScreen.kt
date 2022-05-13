@@ -7,6 +7,8 @@ import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -16,12 +18,16 @@ import androidx.compose.ui.unit.sp
 import com.crownedjester.soft.waterdrinkremainder.domain.model.cupsData
 import com.crownedjester.soft.waterdrinkremainder.presentation.dashboard_screen.components.BottleItem
 import com.crownedjester.soft.waterdrinkremainder.presentation.dashboard_screen.components.CircularProgress
+import com.crownedjester.soft.waterdrinkremainder.presentation.HydrationViewModel
 import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.DeepBlue
 import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.importedFontFamily
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun DashboardScreen() {
+fun DashboardScreen(viewModel: HydrationViewModel, dailyGoalHydration: Int = 2500) {
+
+    val currentDailyHydration by viewModel.currentDailyHydration.collectAsState()
+
     Column(
         modifier = Modifier.padding(12.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -39,12 +45,11 @@ fun DashboardScreen() {
             color = DeepBlue
         )
 
-
         Spacer(modifier = Modifier.height(70.dp))
 
         CircularProgress(
-            drankAmount = 1111,
-            dailyGoalAmount = 2500
+            currentDailyHydration = currentDailyHydration,
+            dailyGoalHydration = dailyGoalHydration
         )
 
         Spacer(modifier = Modifier.height(80.dp))
@@ -58,7 +63,7 @@ fun DashboardScreen() {
                 BottleItem(
                     cup = cup,
                     onBottleClick = { volume ->
-                        /*todo*/
+                        viewModel.updateDailyHydration(volume)
                     }
                 )
             }

@@ -11,13 +11,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.DialogProperties
 import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.DeepBlue
-import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.importedFontFamily
 import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.LightBlue
+import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.importedFontFamily
 
 @Composable
 fun CustomHydrationDialog(
     isDialogShown: Boolean,
-    onAccept: () -> Unit,
+    onAccept: (Int) -> Unit,
     onCancel: () -> Unit,
     setShownDialog: (Boolean) -> Unit
 ) {
@@ -99,7 +99,7 @@ fun CustomHydrationDialog(
                     }
 
                     Button(onClick = {
-                        onAccept()
+                        onAccept(value)
                         setShownDialog(false)
                     }) {
                         Text(

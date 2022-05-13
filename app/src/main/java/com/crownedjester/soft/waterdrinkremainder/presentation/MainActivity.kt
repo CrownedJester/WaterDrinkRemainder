@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -40,6 +41,8 @@ class MainActivity : ComponentActivity() {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                 ) {
+
+                    val viewModel: HydrationViewModel = hiltViewModel()
 
                     val scaffoldState = rememberScaffoldState()
                     val navController = rememberNavController()
@@ -102,10 +105,10 @@ class MainActivity : ComponentActivity() {
                             navController = navController,
                         ) {
                             composable(route = Screen.StatusScreen.route) {
-                                StatusScreen(drankAmount = 1146, dailyGoalAmount = 2500,)
+                                StatusScreen(dailyGoalHydration = 2500, viewModel = viewModel)
                             }
                             composable(route = Screen.DashboardScreen.route) {
-                                DashboardScreen()
+                                DashboardScreen(viewModel)
                             }
                             composable(route = Screen.ProfileScreen.route) {
                                 ProfileScreen(user = User("@crownedjester", "Sergey", ""))

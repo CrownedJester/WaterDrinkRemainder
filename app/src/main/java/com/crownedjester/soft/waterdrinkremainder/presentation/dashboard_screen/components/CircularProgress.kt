@@ -32,14 +32,18 @@ import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.DeepBlue
 import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.LightBlue
 import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.ThinBlue
 import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.importedFontFamily
+import com.crownedjester.soft.waterdrinkremainder.presentation.util.Formats
 import com.crownedjester.soft.waterdrinkremainder.presentation.util.Formats.toSeparatedDecimalString
 import kotlin.math.roundToInt
 
 @Composable
 fun CircularProgress(
-    drankAmount: Int,
-    dailyGoalAmount: Int
+    currentDailyHydration: Int,
+    dailyGoalHydration: Int
 ) {
+
+    val progressValue = Formats.calculateProgress(currentDailyHydration, dailyGoalHydration)
+    val remainingHydration = Formats.calculateRemaining(currentDailyHydration, dailyGoalHydration)
 
     Box(
         modifier = Modifier
@@ -58,7 +62,7 @@ fun CircularProgress(
 
         CustomProgressIndicator(
             modifier = Modifier.fillMaxSize(),
-            progress = drankAmount.toFloat() / dailyGoalAmount.toFloat(),
+            progress = progressValue,
             color = LightBlue,
             strokeWidth = 12.dp
         )
@@ -75,7 +79,7 @@ fun CircularProgress(
                         fontSize = 40.sp
                     )
                 ) {
-                    append("${(drankAmount.toFloat() / dailyGoalAmount.toFloat() * 100).roundToInt()}%")
+                    append("${(currentDailyHydration.toFloat() / dailyGoalHydration.toFloat() * 100).roundToInt()}%")
                 }
 
                 withStyle(
@@ -86,7 +90,7 @@ fun CircularProgress(
                     )
                 ) {
                     append(
-                        drankAmount.toSeparatedDecimalString(
+                        currentDailyHydration.toSeparatedDecimalString(
                             textBefore = "\n",
                             textAfter = " ml\n"
                         )
@@ -100,7 +104,11 @@ fun CircularProgress(
                         fontSize = 14.sp,
                     )
                 ) {
-                    append((drankAmount - dailyGoalAmount).toSeparatedDecimalString(textAfter = " ml"))
+                    append(
+                        remainingHydration.toSeparatedDecimalString(
+                            textAfter = " ml"
+                        )
+                    )
                 }
 
             }
