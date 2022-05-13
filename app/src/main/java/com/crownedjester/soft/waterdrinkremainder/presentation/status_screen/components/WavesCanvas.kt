@@ -13,7 +13,7 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.DeepBlue
-import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.LightBlue
+import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.ThinBlue
 
 @Composable
 fun WavesCanvas(modifier: Modifier = Modifier, wavesHeight: Float) {
@@ -57,8 +57,8 @@ fun WavesCanvas(modifier: Modifier = Modifier, wavesHeight: Float) {
                     path = path,
                     brush = Brush.verticalGradient(
                         listOf(
-                            LightBlue.copy(0.7f),
-                            DeepBlue.copy(0.7f)
+                            ThinBlue.copy(0.5f),
+                            DeepBlue.copy(0.9f)
                         )
                     )
                 )
