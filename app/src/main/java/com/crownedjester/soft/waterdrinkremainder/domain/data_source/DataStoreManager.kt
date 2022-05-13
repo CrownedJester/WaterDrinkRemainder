@@ -31,9 +31,7 @@ class DataStoreManager @Inject constructor(
         )
 
     override suspend fun updateDailyHydration(drankAmount: Int) {
-        dailyHydration.collect {
-            hydrationDataStore.setValue(DataStorePreferences.hydrationPreference, it + drankAmount)
-        }
+        hydrationDataStore.setValue(DataStorePreferences.hydrationPreference,  drankAmount)
     }
 
     private suspend fun <T> DataStore<Preferences>.setValue(
