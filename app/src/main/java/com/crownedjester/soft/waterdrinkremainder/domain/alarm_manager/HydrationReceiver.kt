@@ -1,20 +1,24 @@
 package com.crownedjester.soft.waterdrinkremainder.domain.alarm_manager
 
+import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.util.Log
-import androidx.core.app.NotificationCompat
+import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationManagerCompat
 import com.crownedjester.soft.waterdrinkremainder.R
+import com.crownedjester.soft.waterdrinkremainder.presentation.MainActivity
 
 class HydrationReceiver : BroadcastReceiver() {
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onReceive(context: Context?, intent: Intent?) {
-        val notification: NotificationCompat.Builder
+        val notification: Notification.Builder
         var message = ""
         val channelId = "1029"
 
@@ -23,25 +27,31 @@ class HydrationReceiver : BroadcastReceiver() {
             Log.d("HydrationReceiver", message)
         }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && context != null) {
-            notification = NotificationCompat.Builder(context, channelId)
-                .setSmallIcon(R.drawable.ic_big_cup)
-                .setContentText(message)
+        val pIntent =
+            Intent(context, MainActivity::class.java).let {
+                it.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                PendingIntent.getActivity(
+                    context,
+                    0,
+                    it,
+                    PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+                )
+            }
 
-        }else{
-            notification = NotificationCompat.Builder(context!!)
-        }
+        notification = Notification.Builder(context, channelId)
+            .setSmallIcon(R.drawable.ic_big_cup)
+            .setContentText(message)
+            .setContentIntent(pIntent)
+
         with(NotificationManagerCompat.from(context!!)) {
             if (getNotificationChannel(channelId) == null)
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    createNotificationChannel(
-                        NotificationChannel(
-                            channelId,
-                            "Hydration",
-                            NotificationManager.IMPORTANCE_HIGH
-                        )
+                createNotificationChannel(
+                    NotificationChannel(
+                        channelId,
+                        "Hydration",
+                        NotificationManager.IMPORTANCE_HIGH
                     )
-                }
+                )
 
             notify(1, notification.build())
 
@@ -49,5 +59,4 @@ class HydrationReceiver : BroadcastReceiver() {
 
 
     }
-
 }
