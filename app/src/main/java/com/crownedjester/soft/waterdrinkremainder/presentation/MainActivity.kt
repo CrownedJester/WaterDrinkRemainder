@@ -26,6 +26,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.crownedjester.soft.waterdrinkremainder.common.ReceiverPreferences
 import com.crownedjester.soft.waterdrinkremainder.domain.alarm_manager.HydrationReceiver
 import com.crownedjester.soft.waterdrinkremainder.domain.model.User
 import com.crownedjester.soft.waterdrinkremainder.presentation.dashboard_screen.DashboardScreen
@@ -143,8 +144,8 @@ class MainActivity : ComponentActivity() {
         alarmManager = getSystemService(Context.ALARM_SERVICE) as? AlarmManager
 
         alarmIntent = Intent(this@MainActivity, HydrationReceiver::class.java).let { intent ->
-            intent.action = "HYDRATION_ALARM"
-            intent.putExtra("key", "You dried up, don't forget to drink some water")
+            intent.action = ReceiverPreferences.HYDRATION_RECEIVER_ACTION
+            intent.putExtra(ReceiverPreferences.NOTIFICATION_KEY, "You dried up, don't forget to drink some water!")
             PendingIntent.getBroadcast(
                 this@MainActivity,
                 REQUEST_CODE,
@@ -154,8 +155,8 @@ class MainActivity : ComponentActivity() {
         }
 
         alarmManager?.set(
-            AlarmManager.RTC_WAKEUP,
-            SystemClock.elapsedRealtime() + 60 * 1000,
+            AlarmManager.ELAPSED_REALTIME_WAKEUP,
+            SystemClock.elapsedRealtime() + 60 * 1000L,
             alarmIntent
         )
     }

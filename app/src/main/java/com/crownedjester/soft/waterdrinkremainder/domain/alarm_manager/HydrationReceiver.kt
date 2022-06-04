@@ -12,6 +12,7 @@ import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationManagerCompat
 import com.crownedjester.soft.waterdrinkremainder.R
+import com.crownedjester.soft.waterdrinkremainder.common.ReceiverPreferences
 import com.crownedjester.soft.waterdrinkremainder.presentation.MainActivity
 
 class HydrationReceiver : BroadcastReceiver() {
@@ -22,8 +23,8 @@ class HydrationReceiver : BroadcastReceiver() {
         var message = ""
         val channelId = "1029"
 
-        if (intent?.action == "HYDRATION_ALARM") {
-            message = intent.getStringExtra("key")!!
+        if (intent?.action == ReceiverPreferences.HYDRATION_RECEIVER_ACTION) {
+            message = intent.getStringExtra(ReceiverPreferences.NOTIFICATION_KEY)!!
             Log.d("HydrationReceiver", message)
         }
 
