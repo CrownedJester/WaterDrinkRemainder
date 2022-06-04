@@ -1,4 +1,4 @@
-package com.crownedjester.soft.waterdrinkremainder.presentation.profile_screen.components
+package com.crownedjester.soft.waterdrinkremainder.presentation.user_data_screen.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
@@ -17,13 +17,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
+import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.importedFontFamily
 import com.crownedjester.soft.waterdrinkremainder.presentation.util.ProfileItemData
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun ProfileItem(profileItemData: ProfileItemData, onClick: () -> Unit) {
+fun ProfileItem(profileItemData: ProfileItemData, navController: NavController) {
 
     Card(
         modifier = Modifier
@@ -31,7 +32,9 @@ fun ProfileItem(profileItemData: ProfileItemData, onClick: () -> Unit) {
             .padding(horizontal = 16.dp),
         backgroundColor = Color.White,
         shape = RoundedCornerShape(24),
-        onClick = onClick
+        onClick = {
+            navController.navigate(profileItemData.route)
+        }
     ) {
 
         Column(
@@ -41,7 +44,9 @@ fun ProfileItem(profileItemData: ProfileItemData, onClick: () -> Unit) {
         ) {
 
             Image(
-                modifier = Modifier.zIndex(90f).size(width = 82.dp, height = 128.dp),
+                modifier = Modifier
+                    .zIndex(90f)
+                    .size(width = 82.dp, height = 128.dp),
                 painter = rememberAsyncImagePainter(model = profileItemData.imageRes),
                 contentDescription = "profile item icon"
             )

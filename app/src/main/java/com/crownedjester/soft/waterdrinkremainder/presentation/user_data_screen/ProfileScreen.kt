@@ -1,4 +1,4 @@
-package com.crownedjester.soft.waterdrinkremainder.presentation.profile_screen
+package com.crownedjester.soft.waterdrinkremainder.presentation.user_data_screen
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
@@ -30,14 +30,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.navigation.NavController
 import com.crownedjester.soft.waterdrinkremainder.domain.model.User
-import com.crownedjester.soft.waterdrinkremainder.presentation.profile_screen.components.ProfileItem
 import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.*
+import com.crownedjester.soft.waterdrinkremainder.presentation.user_data_screen.components.ProfileItem
 import com.crownedjester.soft.waterdrinkremainder.presentation.util.ProfileItemData
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun ProfileScreen(user: User) {
+fun ProfileScreen(user: User, navController: NavController) {
 
     ConstraintLayout(
         modifier = Modifier
@@ -159,7 +160,7 @@ fun ProfileScreen(user: User) {
                 items(ProfileItemData.itemsList) { profileDataItem ->
                     ProfileItem(
                         profileItemData = profileDataItem,
-                        onClick = { /*todo*/ }
+                        navController = navController
                     )
                 }
             }

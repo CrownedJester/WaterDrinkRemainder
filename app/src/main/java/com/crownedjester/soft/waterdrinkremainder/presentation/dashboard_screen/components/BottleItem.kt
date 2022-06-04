@@ -4,6 +4,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
+import androidx.compose.material.ContentAlpha
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -26,7 +27,7 @@ fun BottleItem(
     Card(
         modifier = Modifier
             .size(80.dp, 48.dp)
-            .alpha(0.5f)
+            .alpha(ContentAlpha.medium)
             .clickable { onBottleClick(cup.volume) },
         shape = RoundedCornerShape(48),
         backgroundColor = cup.color,

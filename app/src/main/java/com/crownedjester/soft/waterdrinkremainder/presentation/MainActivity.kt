@@ -30,10 +30,11 @@ import com.crownedjester.soft.waterdrinkremainder.common.ReceiverPreferences
 import com.crownedjester.soft.waterdrinkremainder.domain.alarm_manager.HydrationReceiver
 import com.crownedjester.soft.waterdrinkremainder.domain.model.User
 import com.crownedjester.soft.waterdrinkremainder.presentation.dashboard_screen.DashboardScreen
-import com.crownedjester.soft.waterdrinkremainder.presentation.profile_screen.ProfileScreen
+import com.crownedjester.soft.waterdrinkremainder.presentation.edit_profile_screen.EditProfileScreen
 import com.crownedjester.soft.waterdrinkremainder.presentation.status_screen.StatusScreen
 import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.DeepPurple
 import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.WaterDrinkRemainderTheme
+import com.crownedjester.soft.waterdrinkremainder.presentation.user_data_screen.ProfileScreen
 import com.crownedjester.soft.waterdrinkremainder.presentation.util.Screen
 import com.crownedjester.soft.waterdrinkremainder.presentation.util.bottomNavItems
 import dagger.hilt.android.AndroidEntryPoint
@@ -130,7 +131,14 @@ class MainActivity : ComponentActivity() {
                             }
                             composable(route = Screen.ProfileScreen.route) {
                                 ProfileScreen(
-                                    user = User("@crownedjester", "Sergey", "+375292346352")
+                                    user = User("@crownedjester", "Sergey", "+375292346352"),
+                                    navController = navController
+                                )
+                            }
+                            composable(route = Screen.EditProfileScreen.route) {
+                                EditProfileScreen(
+                                    screenTitle = Screen.EditProfileScreen.title,
+                                    navController = navController
                                 )
                             }
                         }
@@ -163,4 +171,3 @@ class MainActivity : ComponentActivity() {
 }
 
 private const val REQUEST_CODE = 0
-private const val FLAG = 0

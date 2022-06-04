@@ -18,4 +18,26 @@ object Formats {
         else
             goal - value
 
+    fun String.hidePass(): String {
+        var hiddenString = ""
+
+        repeat(this.length) {
+            hiddenString += '*'
+        }
+
+        return hiddenString
+    }
+
+    fun String.trimC(): String {
+        var trimString = ""
+
+        this.forEach {
+            if (it != ' ') {
+                trimString += it
+            }
+        }
+
+        return trimString
+
+    }
 }
