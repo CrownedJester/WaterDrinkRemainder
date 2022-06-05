@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.os.SystemClock
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -15,6 +16,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -65,58 +69,72 @@ class MainActivity : ComponentActivity() {
 
                     val scaffoldState = rememberScaffoldState()
                     val navController = rememberNavController()
+                    var isBottomNavVisible by remember { mutableStateOf(true) }
+
+                    navController.addOnDestinationChangedListener { _, destination, _ ->
+                        isBottomNavVisible = destination.route in arrayOf(
+                            Screen.DashboardScreen.route,
+                            Screen.ProfileScreen.route,
+                            Screen.StatusScreen.route
+                        )
+                    }
 
                     Scaffold(
                         modifier = Modifier.fillMaxSize(),
                         scaffoldState = scaffoldState,
                         bottomBar = {
-                            BottomNavigation(
-                                backgroundColor = Color.Transparent,
-                                elevation = 0.dp,
-                                modifier = Modifier
-                                    .padding(horizontal = 20.dp, vertical = 8.dp)
-                            ) {
-                                val navBackStackEntry by navController.currentBackStackEntryAsState()
-                                val currentRoute = navBackStackEntry?.destination?.route
-                                bottomNavItems.forEach { item ->
-                                    val isSelected = currentRoute == item.route
-                                    BottomNavigationItem(
-                                        modifier = Modifier
-                                            .padding(
-                                                horizontal = 22.dp,
-                                                vertical = 8.dp
-                                            )
-                                            .background(
-                                                color = if (isSelected) DeepPurple else Color.Transparent,
-                                                shape = RoundedCornerShape(64)
-                                            ),
-                                        alwaysShowLabel = false,
-                                        label = null,
-                                        icon = {
-                                            Icon(
-                                                modifier = Modifier
-                                                    .size(24.dp),
-                                                painter = painterResource(id = item.iconId),
-                                                contentDescription = null,
-                                                tint = if (isSelected) Color.White else Color.Black
-                                            )
-                                        },
-                                        selected = currentRoute == item.route,
-                                        onClick = {
-                                            navController.navigate(item.route) {
-                                                popUpTo(navController.graph.findStartDestination().id) {
-                                                    saveState = true
+                            AnimatedVisibility(visible = isBottomNavVisible) {
+
+                                BottomNavigation(
+                                    backgroundColor = Color.Transparent,
+                                    elevation = 0.dp,
+                                    modifier = Modifier
+                                        .padding(horizontal = 20.dp, vertical = 8.dp)
+                                ) {
+                                    val navBackStackEntry by navController.currentBackStackEntryAsState()
+                                    val currentRoute = navBackStackEntry?.destination?.route
+
+                                    bottomNavItems.forEach { item ->
+                                        val isSelected = currentRoute == item.route
+                                        BottomNavigationItem(
+                                            modifier = Modifier
+                                                .padding(
+                                                    horizontal = 22.dp,
+                                                    vertical = 8.dp
+                                                )
+                                                .background(
+                                                    color = if (isSelected) DeepPurple else Color.Transparent,
+                                                    shape = RoundedCornerShape(64)
+                                                ),
+                                            alwaysShowLabel = false,
+                                            label = null,
+                                            icon = {
+                                                Icon(
+                                                    modifier = Modifier
+                                                        .size(24.dp),
+                                                    painter = painterResource(id = item.iconId),
+                                                    contentDescription = null,
+                                                    tint = if (isSelected) Color.White else Color.Black
+                                                )
+                                            },
+                                            selected = currentRoute == item.route,
+                                            onClick = {
+                                                navController.navigate(item.route) {
+                                                    popUpTo(navController.graph.findStartDestination().id) {
+                                                        saveState = true
+                                                    }
+                                                    launchSingleTop = true
+                                                    restoreState = true
                                                 }
-                                                launchSingleTop = true
-                                                restoreState = true
-                                            }
-                                        })
+                                            })
+
+                                    }
 
                                 }
-
                             }
                         }
-                    ) { innerPadding ->
+                    ) { _ ->
+
                         NavHost(
                             modifier = Modifier
                                 .background(color = Color.Transparent),
@@ -153,7 +171,10 @@ class MainActivity : ComponentActivity() {
 
         alarmIntent = Intent(this@MainActivity, HydrationReceiver::class.java).let { intent ->
             intent.action = ReceiverPreferences.HYDRATION_RECEIVER_ACTION
-            intent.putExtra(ReceiverPreferences.NOTIFICATION_KEY, "You dried up, don't forget to drink some water!")
+            intent.putExtra(
+                ReceiverPreferences.NOTIFICATION_KEY,
+                "You dried up, don't forget to drink some water!"
+            )
             PendingIntent.getBroadcast(
                 this@MainActivity,
                 REQUEST_CODE,

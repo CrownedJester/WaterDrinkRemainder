@@ -50,11 +50,12 @@ fun InputArea(
 
         Text(
             modifier = Modifier
-                .size(300.dp, 24.dp)
+                .fillMaxWidth(0.80f)
+                .height(24.dp)
                 .padding(top = 2.dp, start = 24.dp),
             text = "@${username.trimC().toLowerCase(Locale.current)}",
             fontFamily = importedFontFamily,
-            fontWeight = FontWeight.Thin,
+            fontWeight = FontWeight.Light,
             color = LightBlue,
             fontStyle = FontStyle.Italic
         )

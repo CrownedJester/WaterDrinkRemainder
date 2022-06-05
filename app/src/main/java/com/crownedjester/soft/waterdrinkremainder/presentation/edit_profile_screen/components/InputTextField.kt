@@ -27,9 +27,9 @@ fun InputTextField(
 
     TextField(
         modifier = modifier
-            .fillMaxWidth(0.80f)
+            .fillMaxWidth(WIDTH_FRACTION)
             .border(
-                width = 1.dp,
+                width = BORDER_WIDTH.dp,
                 color = Color.Black,
                 shape = RoundedCornerShape(
                     CORNER_ANGLE_PERCENTAGE
@@ -50,7 +50,6 @@ fun InputTextField(
         colors = TextFieldDefaults.textFieldColors(
             backgroundColor = Color.White,
             textColor = Color.Black,
-            disabledTextColor = Color.Black.copy(0.5f),
             unfocusedLabelColor = ThinBlue,
             focusedLabelColor = DeepBlue
         )
@@ -59,3 +58,5 @@ fun InputTextField(
 }
 
 private const val CORNER_ANGLE_PERCENTAGE = 12
+private const val BORDER_WIDTH = 1.2f
+private const val WIDTH_FRACTION = 0.80f

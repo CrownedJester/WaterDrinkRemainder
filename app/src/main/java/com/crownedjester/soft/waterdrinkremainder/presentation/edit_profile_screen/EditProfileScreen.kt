@@ -3,6 +3,7 @@ package com.crownedjester.soft.waterdrinkremainder.presentation.edit_profile_scr
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Save
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -27,7 +28,7 @@ fun EditProfileScreen(
             onNavigateBack = {
                 navController.navigateUp()
             },
-            additionalOptionImageVector = Icons.Default.Save,
+            additionalOptionImageVector = Icons.Default.Check,
             onAdditionalOptionClick = { navController.navigateUp() }
         )
 
