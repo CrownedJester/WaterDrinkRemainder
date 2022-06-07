@@ -1,13 +1,12 @@
 package com.crownedjester.soft.waterdrinkremainder.presentation.user_data_screen
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.GridCells
-import androidx.compose.foundation.lazy.LazyVerticalGrid
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
@@ -36,7 +35,6 @@ import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.*
 import com.crownedjester.soft.waterdrinkremainder.presentation.user_data_screen.components.ProfileItem
 import com.crownedjester.soft.waterdrinkremainder.presentation.util.ProfileItemData
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ProfileScreen(user: User, navController: NavController) {
 
@@ -154,8 +152,8 @@ fun ProfileScreen(user: User, navController: NavController) {
             )
 
             LazyVerticalGrid(
-                cells = GridCells.Fixed(2),
-                verticalArrangement = Arrangement.spacedBy(12.dp)
+                columns = GridCells.Fixed(2),
+                verticalArrangement = Arrangement.spacedBy(12.dp),
             ) {
                 items(ProfileItemData.itemsList) { profileDataItem ->
                     ProfileItem(

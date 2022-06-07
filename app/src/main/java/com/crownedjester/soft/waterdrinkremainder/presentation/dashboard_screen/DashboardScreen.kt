@@ -1,10 +1,9 @@
 package com.crownedjester.soft.waterdrinkremainder.presentation.dashboard_screen
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.GridCells
-import androidx.compose.foundation.lazy.LazyVerticalGrid
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -16,13 +15,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.crownedjester.soft.waterdrinkremainder.domain.model.cupsData
+import com.crownedjester.soft.waterdrinkremainder.presentation.HydrationViewModel
 import com.crownedjester.soft.waterdrinkremainder.presentation.dashboard_screen.components.BottleItem
 import com.crownedjester.soft.waterdrinkremainder.presentation.dashboard_screen.components.CircularProgress
-import com.crownedjester.soft.waterdrinkremainder.presentation.HydrationViewModel
 import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.DeepBlue
 import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.importedFontFamily
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun DashboardScreen(viewModel: HydrationViewModel, dailyGoalHydration: Int = 2500) {
 
@@ -55,9 +53,9 @@ fun DashboardScreen(viewModel: HydrationViewModel, dailyGoalHydration: Int = 250
         Spacer(modifier = Modifier.height(80.dp))
 
         LazyVerticalGrid(
-            cells = GridCells.Fixed(2),
+            columns = GridCells.Fixed(2),
             verticalArrangement = Arrangement.spacedBy(12.dp),
-            horizontalArrangement = Arrangement.spacedBy(12.dp)
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
         ) {
             items(cupsData) { cup ->
                 BottleItem(
@@ -67,7 +65,6 @@ fun DashboardScreen(viewModel: HydrationViewModel, dailyGoalHydration: Int = 250
                     }
                 )
             }
-
         }
 
     }
