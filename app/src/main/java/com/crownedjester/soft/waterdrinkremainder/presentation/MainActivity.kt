@@ -35,6 +35,7 @@ import com.crownedjester.soft.waterdrinkremainder.domain.alarm_manager.Hydration
 import com.crownedjester.soft.waterdrinkremainder.domain.model.User
 import com.crownedjester.soft.waterdrinkremainder.presentation.dashboard_screen.DashboardScreen
 import com.crownedjester.soft.waterdrinkremainder.presentation.edit_profile_screen.EditProfileScreen
+import com.crownedjester.soft.waterdrinkremainder.presentation.reminder_settings_screen.ReminderSettingsScreen
 import com.crownedjester.soft.waterdrinkremainder.presentation.status_screen.StatusScreen
 import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.DeepPurple
 import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.WaterDrinkRemainderTheme
@@ -141,24 +142,36 @@ class MainActivity : ComponentActivity() {
                             startDestination = Screen.StatusScreen.route,
                             navController = navController,
                         ) {
+
                             composable(route = Screen.StatusScreen.route) {
                                 StatusScreen(dailyGoalHydration = 2500, viewModel = viewModel)
                             }
+
                             composable(route = Screen.DashboardScreen.route) {
                                 DashboardScreen(viewModel)
                             }
+
                             composable(route = Screen.ProfileScreen.route) {
                                 ProfileScreen(
                                     user = User("@crownedjester", "Sergey", "+375292346352"),
                                     navController = navController
                                 )
                             }
+
                             composable(route = Screen.EditProfileScreen.route) {
                                 EditProfileScreen(
                                     screenTitle = Screen.EditProfileScreen.title,
                                     navController = navController
                                 )
                             }
+
+                            composable(route = Screen.ReminderSettingsScreen.route) {
+                                ReminderSettingsScreen(
+                                    screenTitle = Screen.ReminderSettingsScreen.title,
+                                    navController = navController
+                                )
+                            }
+
                         }
                     }
                 }

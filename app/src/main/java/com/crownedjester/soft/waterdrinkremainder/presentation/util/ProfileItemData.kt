@@ -16,7 +16,11 @@ data class ProfileItemData(
                     "Profile",
                     Screen.EditProfileScreen.route
                 ),
-                ProfileItemData(R.drawable.ic_notifications_100, "Notifications"),
+                ProfileItemData(
+                    R.drawable.ic_notifications_100,
+                    "Notifications",
+                    Screen.ReminderSettingsScreen.route
+                ),
                 ProfileItemData(R.drawable.ic_statistics_100, "Statistics"),
                 ProfileItemData(R.drawable.ic_preferences_100, "Settings"),
             )
