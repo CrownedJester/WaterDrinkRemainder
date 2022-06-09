@@ -21,8 +21,16 @@ data class ProfileItemData(
                     "Notifications",
                     Screen.ReminderSettingsScreen.route
                 ),
-                ProfileItemData(R.drawable.ic_statistics_100, "Statistics"),
-                ProfileItemData(R.drawable.ic_preferences_100, "Settings"),
+
+                ProfileItemData(
+                    R.drawable.ic_statistics_100,
+                    "Statistics",
+                ),
+                ProfileItemData(
+                    R.drawable.ic_preferences_100,
+                    "Settings",
+                    Screen.AppSettingsScreen.route
+                )
             )
     }
 }

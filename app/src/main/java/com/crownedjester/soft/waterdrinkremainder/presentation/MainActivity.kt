@@ -33,6 +33,7 @@ import androidx.navigation.compose.rememberNavController
 import com.crownedjester.soft.waterdrinkremainder.common.ReceiverPreferences
 import com.crownedjester.soft.waterdrinkremainder.domain.alarm_manager.HydrationReceiver
 import com.crownedjester.soft.waterdrinkremainder.domain.model.User
+import com.crownedjester.soft.waterdrinkremainder.presentation.app_settings_screen.AppSettingsScreen
 import com.crownedjester.soft.waterdrinkremainder.presentation.dashboard_screen.DashboardScreen
 import com.crownedjester.soft.waterdrinkremainder.presentation.edit_profile_screen.EditProfileScreen
 import com.crownedjester.soft.waterdrinkremainder.presentation.reminder_settings_screen.ReminderSettingsScreen
@@ -168,6 +169,13 @@ class MainActivity : ComponentActivity() {
                             composable(route = Screen.ReminderSettingsScreen.route) {
                                 ReminderSettingsScreen(
                                     screenTitle = Screen.ReminderSettingsScreen.title,
+                                    navController = navController
+                                )
+                            }
+
+                            composable(route = Screen.AppSettingsScreen.route) {
+                                AppSettingsScreen(
+                                    screenTitle = Screen.AppSettingsScreen.title,
                                     navController = navController
                                 )
                             }
