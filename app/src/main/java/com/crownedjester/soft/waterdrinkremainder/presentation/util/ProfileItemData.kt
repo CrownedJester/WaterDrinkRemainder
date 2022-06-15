@@ -25,6 +25,7 @@ data class ProfileItemData(
                 ProfileItemData(
                     R.drawable.ic_statistics_100,
                     "Statistics",
+                    Screen.UserStatisticsScreen.route
                 ),
                 ProfileItemData(
                     R.drawable.ic_preferences_100,

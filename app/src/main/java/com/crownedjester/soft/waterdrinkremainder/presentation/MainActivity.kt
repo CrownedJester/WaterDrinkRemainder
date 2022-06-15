@@ -41,6 +41,7 @@ import com.crownedjester.soft.waterdrinkremainder.presentation.status_screen.Sta
 import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.DeepPurple
 import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.WaterDrinkRemainderTheme
 import com.crownedjester.soft.waterdrinkremainder.presentation.user_data_screen.ProfileScreen
+import com.crownedjester.soft.waterdrinkremainder.presentation.user_statistics_screen.UserStatisticsScreen
 import com.crownedjester.soft.waterdrinkremainder.presentation.util.Screen
 import com.crownedjester.soft.waterdrinkremainder.presentation.util.bottomNavItems
 import dagger.hilt.android.AndroidEntryPoint
@@ -176,6 +177,13 @@ class MainActivity : ComponentActivity() {
                             composable(route = Screen.AppSettingsScreen.route) {
                                 AppSettingsScreen(
                                     screenTitle = Screen.AppSettingsScreen.title,
+                                    navController = navController
+                                )
+                            }
+
+                            composable(route = Screen.UserStatisticsScreen.route) {
+                                UserStatisticsScreen(
+                                    screenTitle = Screen.UserStatisticsScreen.title,
                                     navController = navController
                                 )
                             }

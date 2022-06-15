@@ -54,10 +54,12 @@ fun StatusScreen(
     }
 
     val screenHeightDp = LocalConfiguration.current.screenHeightDp
+
     val topMargin = screenHeightDp.toFloat() * Formats.calculateProgress(
         currentDailyHydration,
         dailyGoalHydration
     )
+
     val remainingHydration = calculateRemaining(currentDailyHydration, dailyGoalHydration)
 
     Box(
@@ -66,33 +68,7 @@ fun StatusScreen(
 
         ConstraintLayout(modifier = Modifier.fillMaxSize()) {
 
-            val (waves, progressRow) = createRefs()
-
-            /*  Row(
-                  modifier = Modifier
-                      .fillMaxWidth()
-                      .constrainAs(progressRow) {
-                          top.linkTo(parent.top, (topMargin + WAVES_HEIGHT /2).dp)
-                          linkTo(start = parent.start, end = parent.end)
-                      },
-                  verticalAlignment = Alignment.CenterVertically
-              ) {
-                  Text(
-                      modifier = Modifier.alpha(ContentAlpha.medium),
-                      text = "50%",
-                      style = MaterialTheme.typography.h5,
-                      fontFamily = importedFontFamily
-                  )
-
-                  Divider(
-                      modifier = Modifier
-                          .fillMaxWidth()
-                          .alpha(ContentAlpha.disabled)
-                          .padding(start = 12.dp)
-                          .height(2.dp),
-                      color = Color.Black
-                  )
-              }*/
+            val (waves) = createRefs()
 
             WavesCanvas(
                 wavesHeight = WAVES_HEIGHT,
@@ -100,11 +76,14 @@ fun StatusScreen(
                     .fillMaxSize()
                     .zIndex(0f)
                     .constrainAs(waves) {
+
                         top.linkTo(
                             parent.top,
                             topMargin.dp
                         )
+
                         linkTo(start = parent.start, end = parent.end)
+
                         bottom.linkTo(parent.bottom)
                     }
             )
@@ -123,7 +102,8 @@ fun StatusScreen(
                         Icon(
                             imageVector = Icons.Default.Alarm, contentDescription = "alarm icon"
                         )
-                    })
+                    }
+                )
 
                 Spacer(modifier = Modifier.height(96.dp))
 

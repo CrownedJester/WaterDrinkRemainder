@@ -7,4 +7,5 @@ sealed class Screen(val title: String = "", val route: String) {
     object EditProfileScreen : Screen(title = "Edit Profile Screen", route = "edit_profile_screen")
     object ReminderSettingsScreen : Screen(title = "Reminder", route = "reminder_settings_screen")
     object AppSettingsScreen : Screen(title = "Settings", route = "settings_screen")
+    object UserStatisticsScreen : Screen(title = "Statistics", route = "statistics_screen")
 }
