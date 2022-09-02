@@ -1,13 +1,20 @@
 buildscript {
     ext {
-        compose_ui_version = '1.1.1'
+        compose_ui_version = '1.2.1'
+        hilt_version = '2.43.2'
+        datastore_ver = "1.0.0"
+        coil_ver = '2.2.0'
+        navigation_ver = "2.5.1"
+        coroutines_ver = '1.6.4'
+        work_ver = "2.7.1"
+        room_ver = "2.4.3"
     }
     dependencies {
-        classpath "com.google.dagger:hilt-android-gradle-plugin:2.40.5"
+        classpath "com.google.dagger:hilt-android-gradle-plugin:2.43.2"
     }
 }// Top-level build file where you can add configuration options common to all sub-projects/modules.
 plugins {
-    id 'com.android.application' version '7.4.0-alpha02' apply false
-    id 'com.android.library' version '7.4.0-alpha02' apply false
-    id 'org.jetbrains.kotlin.android' version '1.6.10' apply false
+    id 'com.android.application' version '7.4.0-alpha10' apply false
+    id 'com.android.library' version '7.4.0-alpha10' apply false
+    id 'org.jetbrains.kotlin.android' version '1.7.10' apply false
 }
