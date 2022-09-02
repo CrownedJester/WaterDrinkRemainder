@@ -1,5 +1,6 @@
 package com.crownedjester.soft.waterdrinkremainder.presentation
 
+import android.annotation.SuppressLint
 import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
@@ -31,8 +32,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.crownedjester.soft.waterdrinkremainder.common.ReceiverPreferences
+import com.crownedjester.soft.waterdrinkremainder.data.model.User
 import com.crownedjester.soft.waterdrinkremainder.domain.alarm_manager.HydrationReceiver
-import com.crownedjester.soft.waterdrinkremainder.domain.model.User
 import com.crownedjester.soft.waterdrinkremainder.presentation.app_settings_screen.AppSettingsScreen
 import com.crownedjester.soft.waterdrinkremainder.presentation.dashboard_screen.DashboardScreen
 import com.crownedjester.soft.waterdrinkremainder.presentation.edit_profile_screen.EditProfileScreen
@@ -57,7 +58,7 @@ class MainActivity : ComponentActivity() {
             setupAlarmManager()
         }
     }
-
+    @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -82,8 +83,7 @@ class MainActivity : ComponentActivity() {
                         )
                     }
 
-                    Scaffold(
-                        modifier = Modifier.fillMaxSize(),
+                    Scaffold(modifier = Modifier.fillMaxSize(),
                         scaffoldState = scaffoldState,
                         bottomBar = {
                             AnimatedVisibility(visible = isBottomNavVisible) {
@@ -91,56 +91,44 @@ class MainActivity : ComponentActivity() {
                                 BottomNavigation(
                                     backgroundColor = Color.Transparent,
                                     elevation = 0.dp,
-                                    modifier = Modifier
-                                        .padding(horizontal = 20.dp, vertical = 8.dp)
+                                    modifier = Modifier.padding(horizontal = 20.dp, vertical = 8.dp)
                                 ) {
                                     val navBackStackEntry by navController.currentBackStackEntryAsState()
                                     val currentRoute = navBackStackEntry?.destination?.route
 
                                     bottomNavItems.forEach { item ->
                                         val isSelected = currentRoute == item.route
-                                        BottomNavigationItem(
-                                            modifier = Modifier
-                                                .padding(
-                                                    horizontal = 22.dp,
-                                                    vertical = 8.dp
-                                                )
-                                                .background(
-                                                    color = if (isSelected) DeepPurple else Color.Transparent,
-                                                    shape = RoundedCornerShape(64)
-                                                ),
-                                            alwaysShowLabel = false,
-                                            label = null,
-                                            icon = {
-                                                Icon(
-                                                    modifier = Modifier
-                                                        .size(24.dp),
-                                                    painter = painterResource(id = item.iconId),
-                                                    contentDescription = null,
-                                                    tint = if (isSelected) Color.White else Color.Black
-                                                )
-                                            },
-                                            selected = currentRoute == item.route,
-                                            onClick = {
-                                                navController.navigate(item.route) {
-                                                    popUpTo(navController.graph.findStartDestination().id) {
-                                                        saveState = true
-                                                    }
-                                                    launchSingleTop = true
-                                                    restoreState = true
+                                        BottomNavigationItem(modifier = Modifier
+                                            .padding(
+                                                horizontal = 22.dp, vertical = 8.dp
+                                            )
+                                            .background(
+                                                color = if (isSelected) DeepPurple else Color.Transparent,
+                                                shape = RoundedCornerShape(64)
+                                            ), alwaysShowLabel = false, label = null, icon = {
+                                            Icon(
+                                                modifier = Modifier.size(24.dp),
+                                                painter = painterResource(id = item.iconId),
+                                                contentDescription = null,
+                                                tint = if (isSelected) Color.White else Color.Black
+                                            )
+                                        }, selected = currentRoute == item.route, onClick = {
+                                            navController.navigate(item.route) {
+                                                popUpTo(navController.graph.findStartDestination().id) {
+                                                    saveState = true
                                                 }
-                                            })
+                                                launchSingleTop = true
+                                                restoreState = true
+                                            }
+                                        })
 
                                     }
 
                                 }
                             }
-                        }
-                    ) { _ ->
-
+                        }) { it ->
                         NavHost(
-                            modifier = Modifier
-                                .background(color = Color.Transparent),
+                            modifier = Modifier.background(color = Color.Transparent),
                             startDestination = Screen.StatusScreen.route,
                             navController = navController,
                         ) {
@@ -155,8 +143,11 @@ class MainActivity : ComponentActivity() {
 
                             composable(route = Screen.ProfileScreen.route) {
                                 ProfileScreen(
-                                    user = User("@crownedjester", "Sergey", "+375292346352"),
-                                    navController = navController
+                                    user = User(
+                                        username = "@crownedjester",
+                                        firstName = "Sergey",
+                                        mobile = "+375292346352"
+                                    ), navController = navController
                                 )
                             }
 
@@ -205,10 +196,7 @@ class MainActivity : ComponentActivity() {
                 "You dried up, don't forget to drink some water!"
             )
             PendingIntent.getBroadcast(
-                this@MainActivity,
-                REQUEST_CODE,
-                intent,
-                PendingIntent.FLAG_UPDATE_CURRENT
+                this@MainActivity, REQUEST_CODE, intent, PendingIntent.FLAG_UPDATE_CURRENT
             )
         }
 

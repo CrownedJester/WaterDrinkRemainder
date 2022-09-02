@@ -26,12 +26,23 @@ class DataStoreManager @Inject constructor(
 
     override val dailyHydration: Flow<Int>
         get() = hydrationDataStore.getValueAsFlow(
-            DataStorePreferences.hydrationPreference,
+            DataStorePreferences.dailyHydrationPreferences,
             DataStorePreferences.HYDRATION_DEFAULT_VALUE
         )
 
+    override val hydrationGoal: Flow<Int>
+        get() = hydrationDataStore.getValueAsFlow(
+            DataStorePreferences.goalPreferences,
+            DataStorePreferences.GOAL_DEFAULT_VALUE
+        )
+
+
     override suspend fun updateDailyHydration(drankAmount: Int) {
-        hydrationDataStore.setValue(DataStorePreferences.hydrationPreference,  drankAmount)
+        hydrationDataStore.setValue(DataStorePreferences.dailyHydrationPreferences, drankAmount)
+    }
+
+    override suspend fun setNewHydrationGoal(value: Int) {
+        hydrationDataStore.setValue(DataStorePreferences.goalPreferences, value)
     }
 
     private suspend fun <T> DataStore<Preferences>.setValue(

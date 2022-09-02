@@ -19,8 +19,12 @@ class HydrationViewModel @Inject constructor(
     private val _currentDailyHydration = MutableStateFlow(0)
     val currentDailyHydration: StateFlow<Int> get() = _currentDailyHydration
 
+    private val _currentGoalHydration = MutableStateFlow(0)
+    val currentGoalHydration: StateFlow<Int> get() = _currentGoalHydration
+
     init {
         getCurrentHydration()
+        getGoalHydration()
     }
 
     private fun getCurrentHydration() {
@@ -31,13 +35,23 @@ class HydrationViewModel @Inject constructor(
         }
     }
 
+    private fun getGoalHydration() {
+        viewModelScope.launch(Dispatchers.IO) {
+            dataStoreRepository.hydrationGoal.collectLatest {
+                _currentGoalHydration.emit(it)
+            }
+        }
+    }
+
     fun updateDailyHydration(drankValue: Int) {
         viewModelScope.launch {
-            if (_currentDailyHydration.value > 4000) {
-                dataStoreRepository.updateDailyHydration(0)
-            } else {
-                dataStoreRepository.updateDailyHydration(drankAmount = _currentDailyHydration.value + drankValue)
-            }
+            dataStoreRepository.updateDailyHydration(drankAmount = _currentDailyHydration.value + drankValue)
+        }
+    }
+
+    fun setNewHydrationGoal(value: Int) {
+        viewModelScope.launch {
+            dataStoreRepository.setNewHydrationGoal(value)
         }
     }
 

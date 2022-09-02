@@ -6,6 +6,10 @@ interface DataStoreRepository {
 
     val dailyHydration: Flow<Int>
 
+    val hydrationGoal: Flow<Int>
+
     suspend fun updateDailyHydration(drankAmount: Int)
+
+    suspend fun setNewHydrationGoal(value: Int)
 
 }
