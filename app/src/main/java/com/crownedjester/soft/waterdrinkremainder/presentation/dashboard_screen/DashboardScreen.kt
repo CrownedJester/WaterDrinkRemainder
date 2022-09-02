@@ -29,7 +29,7 @@ fun DashboardScreen(viewModel: HydrationViewModel, dailyGoalHydration: Int = 250
     Column(
         modifier = Modifier.padding(12.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Top
+        verticalArrangement = Arrangement.SpaceEvenly
     ) {
 
         Text(
@@ -50,7 +50,7 @@ fun DashboardScreen(viewModel: HydrationViewModel, dailyGoalHydration: Int = 250
             dailyGoalHydration = dailyGoalHydration
         )
 
-        Spacer(modifier = Modifier.height(80.dp))
+        Spacer(modifier = Modifier.fillMaxHeight(0.35f))
 
         LazyVerticalGrid(
             columns = GridCells.Fixed(2),

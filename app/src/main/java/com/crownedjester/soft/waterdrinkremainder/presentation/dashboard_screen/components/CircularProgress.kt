@@ -19,6 +19,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -44,10 +45,13 @@ fun CircularProgress(
 
     val progressValue = Formats.calculateProgress(currentDailyHydration, dailyGoalHydration)
     val remainingHydration = Formats.calculateRemaining(currentDailyHydration, dailyGoalHydration)
+    val circularRadius = with(LocalConfiguration.current.screenWidthDp) {
+        this * 0.6f
+    }
 
     Box(
         modifier = Modifier
-            .size(200.dp),
+            .size(circularRadius.dp),
         contentAlignment = Alignment.Center
     ) {
 

@@ -1,10 +1,7 @@
 package com.crownedjester.soft.waterdrinkremainder.presentation.user_data_screen.components
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.ExperimentalMaterialApi
@@ -13,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -26,9 +24,16 @@ import com.crownedjester.soft.waterdrinkremainder.presentation.util.ProfileItemD
 @Composable
 fun ProfileItem(profileItemData: ProfileItemData, navController: NavController) {
 
+    val cardWidth = with(LocalConfiguration.current.screenWidthDp) {
+        this * 0.35f
+    }
+    val cardHeight = with(LocalConfiguration.current.screenHeightDp) {
+        this * 0.25f
+    }
+
     Card(
         modifier = Modifier
-            .size(width = 128.dp, height = 172.dp)
+            .size(width = cardWidth.dp, height = cardHeight.dp)
             .padding(horizontal = 16.dp),
         backgroundColor = Color.White,
         shape = RoundedCornerShape(24),
@@ -40,13 +45,16 @@ fun ProfileItem(profileItemData: ProfileItemData, navController: NavController) 
         Column(
             modifier = Modifier
                 .fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.SpaceEvenly
         ) {
 
             Image(
                 modifier = Modifier
                     .zIndex(90f)
-                    .size(width = 82.dp, height = 128.dp),
+                    .padding(horizontal = 8.dp, vertical = 12.dp)
+                    .fillMaxWidth(0.8f)
+                    .fillMaxHeight(0.6f),
                 painter = rememberAsyncImagePainter(model = profileItemData.imageRes),
                 contentDescription = "profile item icon"
             )

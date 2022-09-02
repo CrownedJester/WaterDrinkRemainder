@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -24,9 +25,18 @@ fun BottleItem(
     onBottleClick: (Int) -> Unit
 ) {
 
+    val cardHeight = with(LocalConfiguration.current.screenHeightDp) {
+        this * 0.065f
+    }
+
+    val cardWidth = with(LocalConfiguration.current.screenWidthDp) {
+        this * 0.4f
+    }
+
+
     Card(
         modifier = Modifier
-            .size(80.dp, 48.dp)
+            .size(cardWidth.dp, cardHeight.dp)
             .alpha(ContentAlpha.medium)
             .clickable { onBottleClick(cup.volume) },
         shape = RoundedCornerShape(48),
@@ -36,12 +46,11 @@ fun BottleItem(
             modifier = Modifier
                 .fillMaxSize(),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(24.dp)
+            horizontalArrangement = Arrangement.SpaceEvenly
         ) {
 
-            Spacer(modifier = Modifier.width(10.dp))
-
             Icon(
+                modifier = Modifier.padding(vertical = 8.dp),
                 painter = painterResource(cup.iconRes),
                 contentDescription = "bottle icon"
             )

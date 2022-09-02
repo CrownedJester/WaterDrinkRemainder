@@ -18,6 +18,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontStyle
@@ -39,6 +40,10 @@ import com.crownedjester.soft.waterdrinkremainder.presentation.util.ProfileItemD
 fun ProfileScreen(user: User, navController: NavController) {
 
     val (_, firstName, username, mobile, profilePhoto) = user
+
+    val contentColumnTopMargin = with(LocalConfiguration.current.screenHeightDp) {
+        this * 0.3f
+    }
 
     ConstraintLayout(
         modifier = Modifier
@@ -105,7 +110,7 @@ fun ProfileScreen(user: User, navController: NavController) {
                     shape = RoundedCornerShape(topStartPercent = 8, topEndPercent = 8)
                 )
                 .constrainAs(contentColumn) {
-                    top.linkTo(parent.top, 256.dp)
+                    top.linkTo(parent.top, contentColumnTopMargin.dp)
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
                     bottom.linkTo(parent.bottom)
