@@ -13,7 +13,6 @@ import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Coronavirus
 import androidx.compose.material.icons.outlined.PhotoCamera
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -30,13 +29,16 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
-import com.crownedjester.soft.waterdrinkremainder.domain.model.User
+import coil.compose.rememberAsyncImagePainter
+import com.crownedjester.soft.waterdrinkremainder.data.model.User
 import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.*
 import com.crownedjester.soft.waterdrinkremainder.presentation.user_data_screen.components.ProfileItem
 import com.crownedjester.soft.waterdrinkremainder.presentation.util.ProfileItemData
 
 @Composable
 fun ProfileScreen(user: User, navController: NavController) {
+
+    val (_, firstName, username, mobile, profilePhoto) = user
 
     ConstraintLayout(
         modifier = Modifier
@@ -68,7 +70,7 @@ fun ProfileScreen(user: User, navController: NavController) {
                     linkTo(start = backImageSurface.start, end = backImageSurface.end)
                     linkTo(top = backImageSurface.top, bottom = backImageSurface.bottom)
                 },
-            imageVector = Icons.Outlined.Coronavirus,
+            painter = rememberAsyncImagePainter(profilePhoto),
             contentDescription = "user image"
         )
 
@@ -126,10 +128,7 @@ fun ProfileScreen(user: User, navController: NavController) {
                             color = DeepBlue
                         )
                     ) {
-                        user.firstName.let { firstName ->
-                            if (firstName == null) append("")
-                            else append(firstName)
-                        }
+                        append(firstName)
                     }
 
                     withStyle(
@@ -141,10 +140,7 @@ fun ProfileScreen(user: User, navController: NavController) {
                             fontStyle = FontStyle.Italic
                         )
                     ) {
-                        user.username.let { username ->
-                            if (username == null) append("")
-                            else append("\n$username")
-                        }
+                        append("\n$username")
                     }
 
                 }
