@@ -1,5 +1,6 @@
 package com.crownedjester.soft.waterdrinkremainder.presentation.status_screen
 
+import androidx.activity.ComponentActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -15,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
@@ -24,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.crownedjester.soft.waterdrinkremainder.presentation.HydrationViewModel
 import com.crownedjester.soft.waterdrinkremainder.presentation.status_screen.components.CustomHydrationDialog
 import com.crownedjester.soft.waterdrinkremainder.presentation.status_screen.components.WavesCanvas
@@ -36,12 +39,14 @@ import com.crownedjester.soft.waterdrinkremainder.presentation.util.Formats.toSe
 @Composable
 fun StatusScreen(
     modifier: Modifier = Modifier,
-    viewModel: HydrationViewModel,
-    dailyGoalHydration: Int = 2500
 ) {
 
+    val viewModel = viewModel<HydrationViewModel>(LocalContext.current as ComponentActivity)
+
     var isDialogShown by remember { mutableStateOf(false) }
+
     val currentDailyHydration by viewModel.currentDailyHydration.collectAsState()
+    val dailyGoalHydration by viewModel.currentGoalHydration.collectAsState()
 
     CustomHydrationDialog(
         isDialogShown = isDialogShown,

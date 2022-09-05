@@ -1,5 +1,6 @@
 package com.crownedjester.soft.waterdrinkremainder.presentation.dashboard_screen
 
+import androidx.activity.ComponentActivity
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -10,10 +11,12 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.crownedjester.soft.waterdrinkremainder.domain.model.cupsData
 import com.crownedjester.soft.waterdrinkremainder.presentation.HydrationViewModel
 import com.crownedjester.soft.waterdrinkremainder.presentation.dashboard_screen.components.BottleItem
@@ -22,9 +25,15 @@ import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.DeepBlue
 import com.crownedjester.soft.waterdrinkremainder.presentation.ui.theme.importedFontFamily
 
 @Composable
-fun DashboardScreen(viewModel: HydrationViewModel, dailyGoalHydration: Int = 2500) {
+fun DashboardScreen() {
+
+    val viewModel =
+        viewModel<HydrationViewModel>(LocalContext.current as ComponentActivity)
 
     val currentDailyHydration by viewModel.currentDailyHydration.collectAsState()
+    val dailyGoalHydration by viewModel.currentGoalHydration.collectAsState()
+
+    // ToDo Smooth Animation
 
     Column(
         modifier = Modifier.padding(12.dp),

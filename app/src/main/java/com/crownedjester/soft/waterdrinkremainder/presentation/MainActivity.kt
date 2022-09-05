@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.os.SystemClock
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
@@ -24,7 +25,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.NavHost
@@ -53,11 +53,14 @@ class MainActivity : ComponentActivity() {
     private var alarmManager: AlarmManager? = null
     private var alarmIntent: PendingIntent? = null
 
+    val viewModel by viewModels<HydrationViewModel>()
+
     init {
         lifecycleScope.launchWhenCreated() {
             setupAlarmManager()
         }
     }
+
     @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,8 +71,6 @@ class MainActivity : ComponentActivity() {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                 ) {
-
-                    val viewModel: HydrationViewModel = hiltViewModel()
 
                     val scaffoldState = rememberScaffoldState()
                     val navController = rememberNavController()
@@ -126,7 +127,7 @@ class MainActivity : ComponentActivity() {
 
                                 }
                             }
-                        }) { it ->
+                        }) { _ ->
                         NavHost(
                             modifier = Modifier.background(color = Color.Transparent),
                             startDestination = Screen.StatusScreen.route,
@@ -134,11 +135,11 @@ class MainActivity : ComponentActivity() {
                         ) {
 
                             composable(route = Screen.StatusScreen.route) {
-                                StatusScreen(dailyGoalHydration = 2500, viewModel = viewModel)
+                                StatusScreen()
                             }
 
                             composable(route = Screen.DashboardScreen.route) {
-                                DashboardScreen(viewModel)
+                                DashboardScreen()
                             }
 
                             composable(route = Screen.ProfileScreen.route) {
