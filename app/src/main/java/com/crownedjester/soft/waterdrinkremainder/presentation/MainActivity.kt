@@ -1,11 +1,7 @@
 package com.crownedjester.soft.waterdrinkremainder.presentation
 
-import android.app.AlarmManager
-import android.app.PendingIntent
-import android.content.Context
-import android.content.Intent
+import android.annotation.SuppressLint
 import android.os.Bundle
-import android.os.SystemClock
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.AnimatedVisibility
@@ -24,14 +20,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.crownedjester.soft.waterdrinkremainder.common.ReceiverPreferences
-import com.crownedjester.soft.waterdrinkremainder.domain.alarm_manager.HydrationReceiver
 import com.crownedjester.soft.waterdrinkremainder.domain.model.User
 import com.crownedjester.soft.waterdrinkremainder.presentation.app_settings_screen.AppSettingsScreen
 import com.crownedjester.soft.waterdrinkremainder.presentation.dashboard_screen.DashboardScreen
@@ -49,15 +42,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    private var alarmManager: AlarmManager? = null
-    private var alarmIntent: PendingIntent? = null
-
-    init {
-        lifecycleScope.launchWhenCreated() {
-            setupAlarmManager()
-        }
-    }
-
+    @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -195,29 +180,30 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    private fun setupAlarmManager() {
-        alarmManager = getSystemService(Context.ALARM_SERVICE) as? AlarmManager
+    /*  private fun setupAlarmManager() {
+          alarmManager = getSystemService(Context.ALARM_SERVICE) as? AlarmManager
 
-        alarmIntent = Intent(this@MainActivity, HydrationReceiver::class.java).let { intent ->
-            intent.action = ReceiverPreferences.HYDRATION_RECEIVER_ACTION
-            intent.putExtra(
-                ReceiverPreferences.NOTIFICATION_KEY,
-                "You dried up, don't forget to drink some water!"
-            )
-            PendingIntent.getBroadcast(
-                this@MainActivity,
-                REQUEST_CODE,
-                intent,
-                PendingIntent.FLAG_UPDATE_CURRENT
-            )
-        }
+          alarmIntent = Intent(this@MainActivity, HydrationReceiver::class.java).let { intent ->
+              intent.action = ReceiverPreferences.HYDRATION_RECEIVER_ACTION
+              intent.putExtra(
+                  ReceiverPreferences.NOTIFICATION_KEY,
+                  "You dried up, don't forget to drink some water!"
+              )
+              PendingIntent.getBroadcast(
+                  this@MainActivity,
+                  REQUEST_CODE,
+                  intent,
+                  PendingIntent.FLAG_UPDATE_CURRENT
+              )
+          }
 
-        alarmManager?.set(
-            AlarmManager.ELAPSED_REALTIME_WAKEUP,
-            SystemClock.elapsedRealtime() + 60 * 1000L,
-            alarmIntent
-        )
-    }
+          alarmManager?.set(
+              AlarmManager.ELAPSED_REALTIME_WAKEUP,
+              SystemClock.elapsedRealtime() + 60 * 1000L,
+              alarmIntent
+          )
+      }
+     */
 }
 
 private const val REQUEST_CODE = 0
